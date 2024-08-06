@@ -53,3 +53,31 @@ airports.each_value do |airport|
                             city: airport[:city],
                             country: airport[:country])
 end
+
+flights = {
+  0 => {
+    :start => Date.strptime("04-Aug-24", "%d-%b-%y"),
+    :duration => 675,
+    :departure_airport => Airport.find_by(code: 'LHR'),
+    :arrival_airport => Airport.find_by(code: 'LAX')
+  },
+  1 => {
+    :start => Date.strptime("02-Aug-24", "%d-%b-%y"),
+    :duration => 230,
+    :departure_airport => Airport.find_by(code: 'LGW'),
+    :arrival_airport => Airport.find_by(code: 'MAN')
+  },
+  2 => {
+    :start => Date.strptime("08-Aug-24", "%d-%b-%y"),
+    :duration => 240,
+    :departure_airport => Airport.find_by(code: 'DEN'),
+    :arrival_airport => Airport.find_by(code: 'JFK')
+  }
+}
+
+flights.each_value do |flight|
+  Flight.create_or_find_by(start: flight[:start],
+                           duration: flight[:duration],
+                           departure_airport: flight[:departure_airport],
+                           arrival_airport: flight[:arrival_airport])
+end
