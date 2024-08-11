@@ -1,0 +1,21 @@
+<h1>Book your Flight</h1>
+
+<%= form_with url: "/", method: :get do |form| %>
+  <%= form.label :query, "Departure Airports:" %>
+  <br><br>
+  <%= form.collection_select :departure_airport_id, Airport.order(:name), :id, :name, { include_blank: true } %>
+  <br><br>
+  <%= form.label :query, "Arrival Airports:" %>
+  <br><br>
+  <%= form.collection_select :arrival_airport_id, Airport.order(:name), :id, :name, { include_blank: true } %>
+  <br><br>
+  <%= form.label :query, "Number of Passengers:" %>
+  <br><br>
+  <%= form.select :passengers, [1, 2, 3, 4] %>
+  <br><br>
+  <%= form.label :query, "Depature Dates:" %>
+  <br><br>
+  <%= form.select(:flight, Flight.all.collect {|flight| [ flight.start_date_formatted, flight.id ] }, { include_blank: true }) %>
+  <br><br>
+  <%= form.submit "Search" %>
+<% end %>
