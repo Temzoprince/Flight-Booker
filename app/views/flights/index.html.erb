@@ -3,11 +3,11 @@
 <%= form_with url: "/", method: :get do |form| %>
   <%= form.label :query, "Departure Airports:" %>
   <br><br>
-  <%= form.collection_select :departure_airport_id, Airport.order(:name), :id, :name, { include_blank: true } %>
+  <%= form.collection_select :departure_airport_id, Airport.order(:name), :id, :name %>
   <br><br>
   <%= form.label :query, "Arrival Airports:" %>
   <br><br>
-  <%= form.collection_select :arrival_airport_id, Airport.order(:name), :id, :name, { include_blank: true } %>
+  <%= form.collection_select :arrival_airport_id, Airport.order(:name), :id, :name %>
   <br><br>
   <%= form.label :query, "Number of Passengers:" %>
   <br><br>
@@ -15,7 +15,24 @@
   <br><br>
   <%= form.label :query, "Depature Dates:" %>
   <br><br>
-  <%= form.select(:flight, Flight.all.collect {|flight| [ flight.start_date_formatted, flight.id ] }, { include_blank: true }) %>
+  <%= form.select(:start, Flight.all.collect {|flight| [ flight.start_date_formatted, flight.start.to_date ] }.uniq ) %>
   <br><br>
   <%= form.submit "Search" %>
+<% end %>
+
+<% if @available_flights.any? %>
+
+<h2>Available Flights</h2>
+
+<%= form_with url: "", method: :get do |form| %>
+  <% @available_flights.each do |flight| %>
+    <%= form.radio_button flight, flight.id %> <br>
+    <%= form.label flight, "Departure: #{flight.departure_airport.code} ----" %>
+    <%= form.label flight, "Arrival: #{flight.arrival_airport.code} ----" %>
+    <%= form.label flight, "Departure Time: #{flight.start_date_time} ----" %>
+    <%= form.label flight, "Duration: #{flight.duration_hours_minutes}  " %>
+  <% end %>
+<br><br>
+<%= form.submit "Submit" %>
+<% end %>
 <% end %>

@@ -5,5 +5,13 @@ class Flight < ApplicationRecord
   def start_date_formatted
     start.strftime('%A, %d/%m/%Y')
   end
+
+  def start_date_time
+    start.strftime('%A, %d/%m/%Y %I:%M%p')
+  end
+
+  def duration_hours_minutes
+    "#{duration/60}h #{duration % 60}min"
+  end
 end
 
