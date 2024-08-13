@@ -1,0 +1,24 @@
+<h1>Create a new Booking</h1>
+
+<h2>Flight Information</h2>
+<p> <%= "Departure Date: #{@booking.flight.start_date_time}" %></p>
+<p> <%= "Route: From #{@booking.flight.departure_airport.code} To: #{@booking.flight.arrival_airport.code}" %></p>
+<p> <%= "Duration: #{@booking.flight.duration_hours_minutes}" %></p>
+<p> <%= "Flight ID: #{@booking.flight_id}" %></p>
+
+<h2>Passenger Information</h2>
+<%= form_with model: @booking do |form| %>
+  <% n = 1 %>
+    <%= form.fields_for :passengers do |passenger_form| %>
+        <h3><%= "Passenger #{n}" %></h3>
+        <%= passenger_form.label :name, "Passenger name:"%>
+        <%= passenger_form.text_field :name, value: "Enter your full name" %>
+        <br><br>
+        <%= passenger_form.label :email, "Passenger email:" %>
+        <%= passenger_form.text_field :email, placeholder: " example@email.com " %>
+        <br><br>
+        <% n += 1 %>
+    <% end %>
+  <%= form.hidden_field(:flight_id, value: @booking.flight_id ) %>
+  <%= form.submit "Finish Booking" %> 
+<% end %>

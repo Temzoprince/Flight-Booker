@@ -1,0 +1,22 @@
+<h1>Booking Confirmed!</h1>
+
+
+<h2>Flight Information</h2>
+
+<p>Date and Time: <%= @booking.flight.start_date_time %></p>
+<p>Route: <%= @booking.flight.departure_airport.code %> To: <%= @booking.flight.arrival_airport.code %></p>
+<p>Duration: <%= @booking.flight.duration_hours_minutes %></p>
+<p>Flight ID: <%= @booking.flight_id %></p>
+<br>
+
+<h2>Passenger Information</h2>
+
+<ol>
+  <% @booking.passengers.each do |passenger| %>
+    <li>
+      <p>Name: <%= passenger.name %></p>
+      <p>Email: <%= passenger.email %></p>
+    </li>
+    <br>
+  <% end %>
+</ol>

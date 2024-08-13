@@ -24,13 +24,11 @@
 
 <h2>Available Flights</h2>
 
-<%= form_with url: "", method: :get do |form| %>
+<%= form_with url: new_booking_url, method: :get do |form| %>
   <% @available_flights.each do |flight| %>
-    <%= form.radio_button flight, flight.id %> <br>
-    <%= form.label flight, "Departure: #{flight.departure_airport.code} ----" %>
-    <%= form.label flight, "Arrival: #{flight.arrival_airport.code} ----" %>
-    <%= form.label flight, "Departure Time: #{flight.start_date_time} ----" %>
-    <%= form.label flight, "Duration: #{flight.duration_hours_minutes}  " %>
+    <%= form.radio_button :flight_id, flight.id %> <br>
+    <%= form.label :flight_id, "Flight ##{flight.id}: Departure: #{flight.departure_airport.code} ---- Arrival: #{flight.arrival_airport.code} ---- Departure Time: #{flight.start.strftime('%d %b %Y %H:%M')} ---- Duration: #{flight.duration_hours_minutes}" %>
+    <%= form.hidden_field(:passenger_number, value: params[:passengers] ) %>
   <% end %>
 <br><br>
 <%= form.submit "Submit" %>
