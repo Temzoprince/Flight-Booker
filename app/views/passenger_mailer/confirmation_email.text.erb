@@ -1,0 +1,13 @@
+You're going away, <%= @user.name %>!
+===============================================
+
+Your flight with us has been successfully booked!
+
+Your flight details are show below:
+
+Date and Time: <%= @booking.flight.start_date_time %>
+Route: <%= @booking.flight.departure_airport.code %> To: <%= @booking.flight.arrival_airport.code %>
+Duration: <%= @booking.flight.duration_hours_minutes %>
+Flight ID: <%= @booking.flight_id %>
+
+Thanks for flying with us and have a great day!

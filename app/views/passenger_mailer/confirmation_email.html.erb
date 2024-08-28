@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You're going away, <%= @user.name %>!</h1>
+    <p>
+      Your flight with us has been successfully booked!
+      <br><br>
+      Your flight details are as show below:
+      <br><br>
+      Date and Time: <%= @booking.flight.start_date_time %><br>
+      Route: <%= @booking.flight.departure_airport.code %> To: <%= @booking.flight.arrival_airport.code %><br>
+      Duration: <%= @booking.flight.duration_hours_minutes %><br>
+      Flight ID: <%= @booking.flight_id %>
+    </p>
+
+    <p>Thanks for flying with us and have a great day!</p>
+  </body>
+</html>

@@ -24,8 +24,8 @@ export default class extends Controller {
     inputName.id = `booking_passengers_attributes_${this.indexValue}_name`
 
     const inputEmail = inputs[1]
-    inputEmail.name = `booking[passengers_attributes][${this.indexValue}][name]`
-    inputEmail.id = `booking_passengers_attributes_${this.indexValue}_name`
+    inputEmail.name = `booking[passengers_attributes][${this.indexValue}][email]`
+    inputEmail.id = `booking_passengers_attributes_${this.indexValue}_email`
     
     //select label for form and make id equal to indexValue
     const labels = this.templateTarget.content.querySelectorAll('label')
